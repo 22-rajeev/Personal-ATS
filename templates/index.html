@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResumeFit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo"><span>ResumeFit</span></div>
+            <div class="contact"><a href="https://rajeevs-portfolio-six.vercel.app">Contact</a></div>
+        </div>
+    </nav>
+    <hr>
+
+    <div class="jd">
+        <h3>Paste Your Job Description Below:</h3>
+        <form id="pdfForm" method="POST" enctype="multipart/form-data">
+            <textarea name="jobDescription" placeholder="Job Description"></textarea>
+            <div class="upload-resume">
+                <label for="pdfInput" class="custom-file-upload" id="fileLabel">
+                    Click here to upload your Resume PDF 
+                </label>
+                <input type="file" id="pdfInput" name="pdfInput" accept=".pdf" onchange="updateFileName()">
+            </div>
+  
+    <div class="options">
+        <button type="submit" name="action" value="percentage_match" class="button-50">Percentage Match</button>
+        <button type="submit" name="action" value="profile_summary" class="button-50">Resume Analysis</button>
+        <button type="submit" name="action" value="improve_skills" class="button-50">Skill Improvement Stratergy</button>
+        <button type="submit" name="action" value="missing_keywords" class="button-50">Missing Keywords</button>
+    </div>
+</form>
+</div>
+<div class="op">
+    <div class="output">
+        {% if response %}
+            <pre>{{ response }}</pre>
+        {% endif %}
+    </div>
+</div>
+<script>
+    function updateFileName() {
+        var input = document.getElementById('pdfInput');
+        var label = document.getElementById('fileLabel');
+    
+        if (input.files.length > 0) {
+            label.textContent = input.files[0].name; // Set label to file name
+        } else {
+            label.textContent = "Click here to upload your Resume PDF"; // Reset if no file
+        }
+    }
+    </script>
+</body>
+</html>
